@@ -1,0 +1,12 @@
+{
+  "name": "devcraft",
+  "displayName": "devcraft",
+  "expo": {
+    "name": "devcraft",
+    "slug": "devcraft",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
