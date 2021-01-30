@@ -13,6 +13,7 @@ import {
   ToastAndroid,
   Keyboard,
 } from "react-native";
+import { StackActions, NavigationActions } from '@react-navigation/native';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from '../../constants/color'
 import axios from "axios";
@@ -77,10 +78,15 @@ export default class RegScreen extends React.Component {
         password: this.state.password
       })
       .then((response)=>{
-        this.props.navigation.navigate('Main',{token:response.data.token})
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'Main' })],
+          });
+          this.props.navigation.dispatch(resetAction);
         
       })
       .catch(err => {
+          console.log(err)
           ToastAndroid.show("Something is wrong", ToastAndroid.SHORT)
           this.setState({loading:false})
           this.showbutton()
@@ -180,10 +186,10 @@ export default class RegScreen extends React.Component {
       <View style={{ flex: 1, backgroundColor: Colors.primary }}>
         <View style = {{justifyContent:'flex-end',flex:1,marginLeft:'15%',paddingRight:'20%',marginTop:'30%'}}>
             <Text style = {{fontSize:36,fontWeight:'bold',color:Colors.textPrimary}}>
-                Let's get you started.
+                Welcome back...
             </Text>
             <Text style = {{fontSize:24,color:Colors.textPrimary}}>
-                Register an account to continue.
+                Login to continue.
             </Text>
         </View>
         <View style={styles.container}>

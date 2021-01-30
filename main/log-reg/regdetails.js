@@ -14,6 +14,7 @@ import {
   Dimensions,
   Image,
 } from "react-native";
+import { StackActions, NavigationActions } from '@react-navigation/native';
 import { Ionicons } from "@expo/vector-icons";
 import Slider from "react-native-fluid-slider";
 import axios from "axios";
@@ -87,55 +88,15 @@ export default class RegDet extends React.Component {
     }
   }
   nextPress() {
-    if (this.state.scrollPos == 1) {
-      this.scrollview.scrollTo({
-        x: Dimensions.get("window").width,
-        animated: true,
-      });
-      this.setState({ scrollPos: 2 });
-    } else {
-      this.scrollview.scrollTo({
-        x: -Dimensions.get("window").width,
-        animated: true,
-      });
-      this.setState({ scrollPos: 1 });
-    }
+    this.props.navigation.dispatch(NavigationActions.reset(
+                 {
+                    index: 0,
+                    actions: [
+                      NavigationActions.navigate({ routeName: 'Main'})
+                    ]
+                  }));
   }
-  async handlePress() {
-    this.setState({ loading: true });
-    const config = {
-      headers: {
-        Authorization: `Bearer ${this.props.navigation.state.params.userId}`,
-      },
-    };
-
-    await axios
-      .patch(
-        "https://chatapp-backend111.herokuapp.com/user",
-        {
-          name: this.state.name,
-          gender: this.state.gender,
-        },
-        config
-      )
-      .then(() => {
-        ToastAndroid.show(`Profile Set`, ToastAndroid.SHORT);
-      })
-      .then(() =>
-        this.setState({
-          loading: false,
-        })
-      )
-      .then(() =>
-        this.props.navigation.navigate("Profession", {
-          userId: this.state.userId,
-        })
-      )
-      .catch((error) => {
-        ToastAndroid.show(`Something is wrong`, ToastAndroid.SHORT);
-      });
-    this.setState({ loading: false });
-  }
+  
 
   intSelect(item){
       let flag = false
