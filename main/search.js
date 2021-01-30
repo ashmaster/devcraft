@@ -80,7 +80,7 @@ export default class Search extends React.Component {
           />
           <View style={styles.viewMore}>
             <View><Text style={styles.text}>Top Categories</Text></View>
-            <View style = {{width:Dimensions.get('window').width/2-50}}/>
+            <View style = {{width:Dimensions.get('window').width/2-40}}/>
             <View style={{flexDirection: 'row'}}>
               <Text style={[styles.text, {paddingRight: 5}]}>See more</Text>
               <Feather name="arrow-right-circle" size={24} color={Colors.textPrimary} />

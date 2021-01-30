@@ -29,7 +29,7 @@ export default class Regorlog extends React.Component {
   onSwipeLeft(gestureState) {
     this.setState({ myText: "You swiped left!" });
     this.logText.fadeOutLeftBig();
-    this.props.navigation.navigate('Main')
+    this.props.navigation.navigate('Log')
   }
 
   onSwipeRight(gestureState) {
