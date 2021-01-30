@@ -8,6 +8,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "splash": {
+      "image": "./images/spalsh.png",
+      "backgroundColor": "#303841"
+    },
     "android":{"softwareKeyboardLayoutMode": "pan"}
   }
 }
