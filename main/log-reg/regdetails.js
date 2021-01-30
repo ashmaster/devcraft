@@ -35,6 +35,7 @@ export default class RegDet extends React.Component {
       userId: "",
       current: "School",
       scrollPos: 1,
+      interests: [],
     };
   }
   backAction = () => {
@@ -135,7 +136,42 @@ export default class RegDet extends React.Component {
       });
     this.setState({ loading: false });
   }
+
+  intSelect(item){
+      let flag = false
+      this.state.interests.map((it,index)=>{
+          if(it===item)
+            flag = true
+      })
+      if(flag == false){
+        this.setState(prevState => {
+            return {interests: [...prevState.interests,item]}
+         })
+         console.log(this.state.interests)
+      }
+      else{
+        var filtered = this.state.interests.filter(function(value, index, arr){ 
+            return value !== item;
+        });
+        this.setState({interests:filtered})
+      }
+      
+  }
   render() {
+    const interests = [
+      "Web Development",
+      "Data Science",
+      "App Design",
+      "Deep Learning",
+      "Competitive Programming",
+      "Machine Learning",
+      "Backend",
+      "Frontend",
+      "Fullstack",
+      "Graphic Design",
+      "Photography",
+      
+    ];
     return (
       <View style={styles.innerContainer}>
         <ScrollView
@@ -144,6 +180,7 @@ export default class RegDet extends React.Component {
           ref={(scroll) => (this.scrollview = scroll)}
           scrollEnabled={false}
         >
+          {/*
           <View style={{ flex: 1, width: Dimensions.get("window").width }}>
             <View
               style={{
@@ -358,6 +395,7 @@ export default class RegDet extends React.Component {
               </View>
             </View>
           </View>
+          */}
           <View style={{ flex: 1, width: Dimensions.get("window").width }}>
             <View
               style={{
@@ -369,14 +407,15 @@ export default class RegDet extends React.Component {
             >
               <Text
                 style={{
-                  fontSize: 36,
+                  fontSize: 30,
                   fontWeight: "bold",
                   color: Colors.textPrimary,
+                  marginTop:50
                 }}
               >
                 One more step
               </Text>
-              <Text style={{ fontSize: 24, color: Colors.textPrimary }}>
+              <Text style={{ fontSize: 20, color: Colors.textPrimary }}>
                 Provide your personal details
               </Text>
             </View>
@@ -405,7 +444,7 @@ export default class RegDet extends React.Component {
                         color: Colors.textPrimary,
                         fontStyle: "italic",
                       }}
-                    ></Text>
+                    >{this.state.current == "Working"? "" : "in" }</Text>
                   </View>
                   <View
                     style={{
@@ -414,7 +453,7 @@ export default class RegDet extends React.Component {
                       flexDirection: "row",
                       justifyContent: "space-evenly",
                       alignItems: "center",
-                      height: "25%",
+                      height: "30%",
                       width: "70%",
                     }}
                   >
@@ -476,62 +515,18 @@ export default class RegDet extends React.Component {
                 </View>
                 <Text
                   style={{
-                    marginBottom: 20,
                     color: Colors.textPrimary,
                     fontStyle: "italic",
                     textAlign: "left",
+                    marginBottom: 10,
                     marginRight: Dimensions.get("window").width / 3,
                   }}
                 >
                   your interests are{" "}
                 </Text>
+                {/**********************Card for homepage*************************
                 <ScrollView horizontal>
-                  <View
-                    style={{
-                      width: 170,
-                      height: 240,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                  {/**********************Card for homepage**************************/}
-                    <View style={styles.categoryCard}>
-                      <Image
-                        source={require("../../images/Group.png")}
-                        style={{
-                          width: 100,
-                          height: 100,
-                          position: "absolute",
-                          top: -20,
-                          alignSelf: "center",
-                        }}
-                      />
-                      <ImageBackground
-                        source={require("../../images/interest.png")}
-                        style={{
-                          width: 148,
-                          height: 100,
-                          justifyContent: "flex-end",
-                        }}
-                        imageStyle={{
-                          borderBottomLeftRadius: 15,
-                          borderBottomRightRadius: 15,
-                        }}
-                        resizeMode="cover"
-                      >
-                        <Text
-                          style={{
-                            textAlign: "center",
-                            color: Colors.textPrimary,
-                            marginBottom: 10,
-                            fontWeight: "bold",
-                          }}
-                        >
-                          Web Development
-                        </Text>
-                      </ImageBackground>
-                    </View>
-                  </View>
+                  
                   <View
                     style={{
                       width: 170,
@@ -576,7 +571,9 @@ export default class RegDet extends React.Component {
                         </Text>
                       </ImageBackground>
                     </View>
+                    
                   </View>
+                  
                   <View
                     style={{
                       width: 170,
@@ -621,126 +618,53 @@ export default class RegDet extends React.Component {
                         </Text>
                       </ImageBackground>
                     </View>
+                    
                   </View>
-                  <View
-                    style={{
-                      width: 170,
-                      height: 240,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <View style={styles.categoryCard}>
-                      <Image
-                        source={require("../../images/Group.png")}
+                  
+                </ScrollView>
+                */}
+
+                <ScrollView
+                  contentContainerStyle={{
+                    flexDirection: "row",
+                    alignItems: "flex-start",
+                    flexWrap: "wrap",
+                    paddingLeft: 50,
+                    paddingRight: 10,
+                  }}
+                >
+                  {interests.map((item, index) => {
+                    let flag = false;
+                    this.state.interests.map((it,index)=>{
+                        if(it == item)
+                            flag = true
+                    })
+                    return (
+                      <TouchableOpacity
                         style={{
-                          width: 100,
-                          height: 100,
-                          position: "absolute",
-                          top: -20,
-                          alignSelf: "center",
+                          paddingVertical: 10,
+                          paddingHorizontal: 10,
+                          justifyContent: "center",
+                          alignItems: "center",
+                          backgroundColor: flag == true ? Colors.secondary : Colors.secondaryDark,
+                          borderRadius: 10,
+                          marginRight: 10,
+                          marginTop: 20,
                         }}
-                      />
-                      <ImageBackground
-                        source={require("../../images/interest.png")}
-                        style={{
-                          width: 148,
-                          height: 100,
-                          justifyContent: "flex-end",
-                        }}
-                        imageStyle={{
-                          borderBottomLeftRadius: 15,
-                          borderBottomRightRadius: 15,
-                        }}
-                        resizeMode="cover"
+                        onPress = {()=>this.intSelect(item)}
                       >
-                        <Text
-                          style={{
-                            textAlign: "center",
-                            color: Colors.textPrimary,
-                            marginBottom: 10,
-                            fontWeight: "bold",
-                          }}
-                        >
-                          Web Development
+                        <Text style={{ color: Colors.textPrimary }}>
+                          {item}
                         </Text>
-                      </ImageBackground>
-                    </View>
-                  </View>
-                  <View
-                    style={{
-                      width: 170,
-                      height: 240,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <View style={styles.categoryCard}>
-                      <Image
-                        source={require("../../images/Group.png")}
-                        style={{
-                          width: 100,
-                          height: 100,
-                          position: "absolute",
-                          top: -20,
-                          alignSelf: "center",
-                        }}
-                      />
-                      <ImageBackground
-                        source={require("../../images/interest.png")}
-                        style={{
-                          width: 148,
-                          height: 100,
-                          justifyContent: "flex-end",
-                        }}
-                        imageStyle={{
-                          borderBottomLeftRadius: 15,
-                          borderBottomRightRadius: 15,
-                        }}
-                        resizeMode="cover"
-                      >
-                        <Text
-                          style={{
-                            textAlign: "center",
-                            color: Colors.textPrimary,
-                            marginBottom: 10,
-                            fontWeight: "bold",
-                          }}
-                        >
-                          Web Development
-                        </Text>
-                      </ImageBackground>
-                    </View>
-                  </View>
+                      </TouchableOpacity>
+                    );
+                  })}
                 </ScrollView>
               </View>
             </View>
           </View>
         </ScrollView>
-        <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity
-            onPress={() => this.nextPress()}
-            style={[
-              styles.next,
-              {
-                borderColor:
-                  this.state.scrollPos == 2
-                    ? Colors.secondary
-                    : Colors.secondaryDark,
-              },
-            ]}
-          >
-            <Ionicons
-              name="arrow-back"
-              color={
-                this.state.scrollPos == 2
-                  ? Colors.secondary
-                  : Colors.secondaryDark
-              }
-              size={40}
-            />
-          </TouchableOpacity>
-          <View style={{ width: Dimensions.get("window").width / 2 }} />
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity
             onPress={() => this.nextPress()}
             style={[
@@ -758,7 +682,7 @@ export default class RegDet extends React.Component {
               color={
                 this.state.scrollPos == 1
                   ? Colors.secondary
-                  : Colors.secondaryDark
+                  : Colors.textSecondary
               }
               size={40}
             />
@@ -792,6 +716,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
+    paddingTop:30
   },
   sliderContainer: {
     width: "70%",
@@ -807,6 +732,7 @@ const styles = StyleSheet.create({
 
   genderContainer: {
     marginTop: 20,
+    height: "20%",
   },
   text: {
     color: "#fff",
@@ -852,11 +778,20 @@ const styles = StyleSheet.create({
   categoryCard: {
     height: 150,
     width: 150,
+
     borderRadius: 15,
-    borderWidth: 1,
-    borderColor: Colors.textPrimary,
+    backgroundColor: Colors.secondary,
     justifyContent: "flex-end",
     elevation: 2,
     paddingRight: 2,
+  },
+  continuebtn: {
+    width: Dimensions.get("window").width / 3,
+    height: 50,
+    borderRadius: 20,
+    backgroundColor: Colors.secondaryDark,
+    marginHorizontal: 40,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
