@@ -9,22 +9,32 @@ import {
   Image,
   ImageBackground
 } from "react-native";
+import Head from '../components/Head'
 import Colors from "../constants/color";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, Feather } from "@expo/vector-icons";
 export default class Search extends React.Component {
   render() {
     const interests = [
-        "Web Development",
-        "Data Science",
-        "App Design",
-        "Deep Learning",
-        "Competitive Programming",
-        "Machine Learning",
-        "Backend",
-        "Frontend",
-        "Fullstack",
-        "Graphic Design",
-        "Photography",  
+        {
+            name:"Web development",
+            uri:require('../images/Group.png')
+        },
+        {
+            name:"Data Science",
+            uri:require('../images/deep.png')
+        },
+        {
+            name:"App Development",
+            uri:require('../images/appdev.png')
+        },
+        {
+            name:"Competitive Programming",
+            uri:require('../images/compet.png')
+        },
+        {
+            name:"Deep Learning",
+            uri:require('../images/deep.png')
+        }
       ];
     return (
       <View
@@ -33,17 +43,13 @@ export default class Search extends React.Component {
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: Colors.primary,
-          paddingTop: 40,
         }}
       >
-        <ScrollView
-          contentContainerStyle={{
-            alignItems: "center",
-            justifyContent:'center',
-            width: Dimensions.get("window").width,
-          }}
-        >
-          <View style={styles.searchSection}>
+      <Head/>
+        <View style = {{marginVertical:20}}>
+            <Text style = {[styles.text,{fontSize:26}]}>Discover</Text>
+        </View>
+        <View style={styles.searchSection}>
             <Ionicons
               style={styles.searchIcon}
               name="search"
@@ -59,12 +65,28 @@ export default class Search extends React.Component {
               underlineColorAndroid="transparent"
             />
           </View>
+        <ScrollView
+          contentContainerStyle={{
+            alignItems: "center",
+            justifyContent:'center',
+            width: Dimensions.get("window").width,
+          }}
+        >
+          
           <Image
             source={require("../images/Saly-17.png")}
             resizeMode="center"
-            style={{ width: 400,height:200 }}
+            style={{ width: 600,height:200 }}
           />
-          <ScrollView horizontal contentContainerStyle = {{marginHorizontal:40}}>
+          <View style={styles.viewMore}>
+            <View><Text style={styles.text}>Top Categories</Text></View>
+            <View style = {{width:Dimensions.get('window').width/2-50}}/>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={[styles.text, {paddingRight: 5}]}>See more</Text>
+              <Feather name="arrow-right-circle" size={24} color={Colors.textPrimary} />
+            </View>
+          </View>
+          <ScrollView horizontal contentContainerStyle = {{marginHorizontal:40,paddingRight:100}}>
               {interests.map((item,index) => {
                   return(
                     <View
@@ -77,9 +99,9 @@ export default class Search extends React.Component {
                   >
                     <View style={styles.categoryCard}>
                       <Image
-                        source={require("../images/Group.png")}
+                        source={item.uri}
                         style={{
-                          width: 100,
+                          width: 120,
                           height: 100,
                           position: "absolute",
                           top: -20,
@@ -107,7 +129,7 @@ export default class Search extends React.Component {
                             fontWeight: "bold",
                           }}
                         >
-                            {item}
+                            {item.name}
                         </Text>
                       </ImageBackground>
                     </View>
@@ -154,5 +176,15 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     elevation: 2,
     paddingRight: 2,
+  },
+  viewMore: {
+    paddingTop: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+  text: {
+    color: Colors.textPrimary,
+    fontWeight: 'bold',
+    marginLeft:20
   },
 });

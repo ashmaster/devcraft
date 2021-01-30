@@ -112,7 +112,7 @@ export default function Home() {
               <Feather name="arrow-right-circle" size={24} color={Colors.textPrimary} />
             </View>
           </View>
-          <ScrollView horizontal style={{paddingHorizontal: 10}}>
+          <ScrollView horizontal style={{paddingHorizontal: 10,marginBottom:100}}>
             <View style={[styles.catcard, {padding: 2, flexDirection: 'column'}]}>
               <Image source={require('../images/coursesvg.png')} style={{
                 position: 'absolute',
@@ -180,6 +180,7 @@ const styles = StyleSheet.create({
   text: {
     color: Colors.textPrimary,
     fontWeight: 'bold',
+    marginLeft:20
   },
   catcard: {
     height: 250,
