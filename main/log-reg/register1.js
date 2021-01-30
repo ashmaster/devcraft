@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
@@ -12,17 +12,17 @@ import {
   Dimensions,
   Animated,
   Keyboard,
-} from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+} from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Colors from '../../constants/color'
 export default class RegScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-      email: '',
+      email: "",
       emailVerify: false,
-      password: '',
+      password: "",
       passwordVerify: false,
       upperCase: false,
       digit: false,
@@ -68,7 +68,8 @@ export default class RegScreen extends React.Component {
     ]).start();
   }
   async afterHide() {
-    this.setState({loading: true});
+    this.setState({ loading: true });
+    this.props.navigation.navigate('RegDet')
   }
 
   pressed() {
@@ -84,7 +85,7 @@ export default class RegScreen extends React.Component {
     ]).start(() => this.afterHide());
   }
   async onChangeEmail(text) {
-    await this.setState({email: text});
+    await this.setState({ email: text });
     var emailVer;
     if (
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)
@@ -93,15 +94,15 @@ export default class RegScreen extends React.Component {
     } else {
       emailVer = false;
     }
-    this.setState({emailVerify: emailVer});
+    this.setState({ emailVerify: emailVer });
     if (emailVer && this.state.passwordVerify) {
       this.showbutton();
     } else this.hidebutton();
   }
 
   async onChangePassword(text) {
-    await this.setState({password: text});
-    const {password} = this.state;
+    await this.setState({ password: text });
+    const { password } = this.state;
     var upperCase;
     var minDig;
     var symbol;
@@ -138,7 +139,7 @@ export default class RegScreen extends React.Component {
     } else {
       passwordVer = false;
     }
-    this.setState({passwordVerify: passwordVer});
+    this.setState({ passwordVerify: passwordVer });
     if (passwordVer && this.state.emailVerify) {
       this.showbutton();
     } else this.hidebutton();
@@ -147,7 +148,7 @@ export default class RegScreen extends React.Component {
   render() {
     const width = this.showWidth.interpolate({
       inputRange: [0, 2],
-      outputRange: ['0%', '90%'],
+      outputRange: ["0%", "90%"],
     });
 
     const height = this.button.interpolate({
@@ -156,7 +157,7 @@ export default class RegScreen extends React.Component {
     });
     const buttonW = this.buttonWidth.interpolate({
       inputRange: [0, 1],
-      outputRange: ['80%', '0%'],
+      outputRange: ["90%", "0%"],
     });
     const copacity = this.showWidth.interpolate({
       inputRange: [0, 1, 2],
@@ -168,67 +169,85 @@ export default class RegScreen extends React.Component {
     });
     const bopacity = this.buttonOpacity;
     return (
-      <View style={{flex: 1, backgroundColor: '#fff'}}>
+      <View style={{ flex: 1, backgroundColor: Colors.primary }}>
+        <View style = {{justifyContent:'flex-end',flex:1,marginLeft:'15%',paddingRight:'20%',marginTop:'30%'}}>
+            <Text style = {{fontSize:36,fontWeight:'bold',color:Colors.textPrimary}}>
+                Let's get you started.
+            </Text>
+            <Text style = {{fontSize:24,color:Colors.textPrimary}}>
+                Register an account to continue.
+            </Text>
+        </View>
         <View style={styles.container}>
           <Animated.View
             style={[
               styles.card,
-              {opacity: copacity, transform: [{translateY: box_y}]},
-            ]}>
-            <View style={{margin: 20, marginBottom: 20, alignItems: 'center'}}>
-              <Text
-                style={{fontWeight: 'bold', fontSize: 20, textAlign: 'center'}}>
-                Register
-              </Text>
+              { opacity: copacity, transform: [{ translateY: box_y }] },
+            ]}
+          >
+            <View
+              style={{ margin: 20, marginBottom: 20, alignItems: "center" }}
+            >
+              
             </View>
             <View
               style={[
                 styles.entry,
                 {
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
                   paddingHorizontal: 30,
                 },
-              ]}>
-              <Animated.View style={{width, alignSelf: 'center'}}>
+              ]}
+            >
+              <Animated.View style={{ width, alignSelf: "center" }}>
                 <TextInput
-                  style={{
-                    borderBottomWidth: 4,
-                    borderColor: '#ccc',
-                    paddingLeft: 5,
-                    fontSize: 14,
-                  }}
+                  placeholderTextColor={Colors.textSecondary}
+            style={{
+              borderBottomWidth: 2,
+              borderColor: Colors.secondary,
+              fontSize: 18,
+              paddingLeft: 10,
+              color:Colors.textPrimary,
+            }}
                   keyboardType="default"
                   placeholder="Email-id"
                   onChangeText={(text) => this.onChangeEmail(text)}
                 />
               </Animated.View>
               {this.state.emailVerify ? (
-                <MaterialCommunityIcons size={20} name="checkbox-marked-circle" color="green" />
+                <MaterialCommunityIcons
+                  size={20}
+                  name="checkbox-marked-circle"
+                  color="green"
+                />
               ) : (
-                <View style={{width: 20}} />
+                <View style={{ width: 20 }} />
               )}
             </View>
             <View
               style={[
                 styles.entry,
                 {
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
                   paddingHorizontal: 30,
                   marginBottom: 10,
                 },
-              ]}>
-              <Animated.View style={{width, alignSelf: 'center'}}>
+              ]}
+            >
+              <Animated.View style={{ width, alignSelf: "center" }}>
                 <TextInput
-                  style={{
-                    borderBottomWidth: 4,
-                    borderColor: '#ccc',
-                    paddingLeft: 5,
-                    fontSize: 14,
-                  }}
+                  placeholderTextColor={Colors.textSecondary}
+            style={{
+              borderBottomWidth: 2,
+              borderColor: Colors.secondary,
+              fontSize: 18,
+              paddingLeft: 10,
+              color:Colors.textPrimary,
+            }}
                   keyboardType="default"
                   placeholder="Password"
                   secureTextEntry={true}
@@ -236,63 +255,74 @@ export default class RegScreen extends React.Component {
                 />
               </Animated.View>
               {this.state.passwordVerify ? (
-                <MaterialCommunityIcons size={20} name="checkbox-marked-circle" color="green" />
+                <MaterialCommunityIcons
+                  size={20}
+                  name="checkbox-marked-circle"
+                  color="green"
+                />
               ) : (
-                <View style={{width: 20}} />
+                <View style={{ width: 20 }} />
               )}
             </View>
-            <View style={{paddingLeft: 30, paddingBottom: 20}}>
+            <View style={{ paddingLeft: 30, paddingBottom: 20 }}>
               <Text
                 style={{
-                  color: this.state.noOfChar ? 'green' : 'red',
+                  color: this.state.noOfChar ? "green" : "red",
                   fontSize: 12,
-                }}>
+                }}
+              >
                 *At least 8 characters
               </Text>
               <Text
                 style={{
-                  color: this.state.upperCase ? 'green' : 'red',
+                  color: this.state.upperCase ? "green" : "red",
                   fontSize: 12,
-                }}>
+                }}
+              >
                 *At least 1 capital letter
               </Text>
               <Text
                 style={{
-                  color: this.state.symbol ? 'green' : 'red',
+                  color: this.state.symbol ? "green" : "red",
                   fontSize: 12,
-                }}>
+                }}
+              >
                 *Atleast 1 symbol
               </Text>
               <Text
                 style={{
-                  color: this.state.digit ? 'green' : 'red',
+                  color: this.state.digit ? "green" : "red",
                   fontSize: 12,
-                }}>
+                }}
+              >
                 *Atleast 1 digit
               </Text>
             </View>
           </Animated.View>
           <TouchableOpacity
-            style={{width: '100%'}}
-            onPress={() => this.pressed()}>
+            style={{ width: "100%" }}
+            onPress={() => this.pressed()}
+          >
             <Animated.View
               style={{
-                backgroundColor: '#8A4AD9',
-                justifyContent: 'center',
+                backgroundColor: Colors.secondary,
+                justifyContent: "center",
                 height,
                 width: buttonW,
                 opacity: bopacity,
                 borderBottomRightRadius: 20,
                 borderBottomLeftRadius: 20,
-                alignSelf: 'center',
-              }}>
+                alignSelf: "center",
+              }}
+            >
               <Text
                 style={{
-                  textAlign: 'center',
-                  fontWeight: 'bold',
-                  color: '#fff',
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  color: "#fff",
                   fontSize: 18,
-                }}>
+                }}
+              >
                 LOGIN
               </Text>
             </Animated.View>
@@ -300,7 +330,7 @@ export default class RegScreen extends React.Component {
           <ActivityIndicator
             size="large"
             animating={this.state.loading}
-            color={'#8A4AD9'}
+            color={Colors.secondary}
           />
         </View>
       </View>
@@ -310,36 +340,43 @@ export default class RegScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: '100%',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent:'center',
-    backgroundColor: '#fff',
+    flex: 4,
+    height: "100%",
+    width: "100%",
+    alignItems: "center",
+    backgroundColor: Colors.primary,
+    marginTop:Dimensions.get('window').height/40
   },
   card: {
-    borderTopColor: '#8A4AD9',
-    borderTopWidth: 3,
-    width: '80%',
-    elevation: 5,
-    backgroundColor: 'white',
+    width: "90%",
+    shadowColor: "#fff",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
+    backgroundColor: Colors.primary,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    marginBottom: '5%',
+    marginBottom: "5%",
   },
   entry: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 40,
   },
   textInput: {
-    marginLeft: 25,
-    backgroundColor: 'white',
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
-    height: 35,
-    fontSize: 18,
+    backgroundColor: Colors.secondary,
+    borderColor: "#ccc",
+    elevation:1,
+    color:Colors.primary,
+    borderRadius:8,
+    height: 40,
+    fontSize: 14,
     paddingLeft: 15,
   },
 });
