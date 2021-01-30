@@ -72,13 +72,12 @@ export default class RegScreen extends React.Component {
     this.setState({ loading: true });
     
     
-    await axios.post('https://e-learning-platform-backend.herokuapp.com/register', {
-        username: "amp",
+    await axios.post('https://e-learning-platform-backend.herokuapp.com/login', {
         email: this.state.email,
         password: this.state.password
       })
       .then((response)=>{
-        this.props.navigation.navigate('RegDet',{token:response.data.token})
+        this.props.navigation.navigate('Main',{token:response.data.token})
         
       })
       .catch(err => {

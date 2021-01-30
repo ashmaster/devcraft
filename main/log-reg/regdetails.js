@@ -169,8 +169,7 @@ export default class RegDet extends React.Component {
       "Frontend",
       "Fullstack",
       "Graphic Design",
-      "Photography",
-      
+      "Photography",  
     ];
     return (
       <View style={styles.innerContainer}>
@@ -639,8 +638,10 @@ export default class RegDet extends React.Component {
                         if(it == item)
                             flag = true
                     })
+                    
                     return (
                       <TouchableOpacity
+                        key = {item}
                         style={{
                           paddingVertical: 10,
                           paddingHorizontal: 10,
