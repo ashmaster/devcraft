@@ -5,13 +5,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Colors from '../constants/color'
 import { Ionicons } from "@expo/vector-icons";
-import RegScreen from './log-reg/register1'
-import Regorlog from './log-reg/logorreg'
-import RegDet from './log-reg/regdetails'
-import Login from './log-reg/login'
-import Home from './home'
-import Search from './search'
-import Profile from './profile'
+import RegScreen from '../pages/log-reg/register1';
+import Regorlog from '../pages/log-reg/logorreg';
+import RegDet from '../pages/log-reg/regdetails';
+import Login from '../pages/log-reg/login';
+import Home from '../pages/home';
+import Search from '../pages/search';
+import Profile from '../pages/profile';
 
 
 const Stack = createStackNavigator();
