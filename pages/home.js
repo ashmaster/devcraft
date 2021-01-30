@@ -104,7 +104,7 @@ export default function Home() {
           </ScrollView>
         </View>
 
-        <View style={{marginVertical: 5, paddingBottom: 80}}>
+        <View style={{marginVertical: 5}}>
           <View style={styles.viewMore}>
             <View><Text style={styles.text}>Top Courses</Text></View>
             <View style={{flexDirection: 'row'}}>
