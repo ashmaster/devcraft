@@ -88,13 +88,7 @@ export default class RegDet extends React.Component {
     }
   }
   nextPress() {
-    this.props.navigation.dispatch(NavigationActions.reset(
-                 {
-                    index: 0,
-                    actions: [
-                      NavigationActions.navigate({ routeName: 'Main'})
-                    ]
-                  }));
+    this.props.navigation.navigate("Main")
   }
   
 

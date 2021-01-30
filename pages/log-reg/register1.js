@@ -179,6 +179,7 @@ export default class RegScreen extends React.Component {
     const bopacity = this.buttonOpacity;
     return (
       <View style={{ flex: 1, backgroundColor: Colors.primary }}>
+      <MaterialCommunityIcons name = "arrow-left" onPress = {()=>this.props.navigation.goBack()} style = {{position:'absolute',top:80,left:60}} size = {30} color = "#fff"/>
         <View style = {{justifyContent:'flex-end',flex:1,marginLeft:'15%',paddingRight:'20%',marginTop:'30%'}}>
             <Text style = {{fontSize:36,fontWeight:'bold',color:Colors.textPrimary}}>
                 Let's get you started.

@@ -78,11 +78,7 @@ export default class RegScreen extends React.Component {
         password: this.state.password
       })
       .then((response)=>{
-        const resetAction = StackActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: 'Main' })],
-          });
-          this.props.navigation.dispatch(resetAction);
+        this.props.navigation.navigate("Main",{token:response.data.token})
         
       })
       .catch(err => {
@@ -184,6 +180,7 @@ export default class RegScreen extends React.Component {
     const bopacity = this.buttonOpacity;
     return (
       <View style={{ flex: 1, backgroundColor: Colors.primary }}>
+        <MaterialCommunityIcons name = "arrow-left" onPress = {()=>this.props.navigation.goBack()} style = {{position:'absolute',top:100,left:50}} size = {30} color = "#fff"/>
         <View style = {{justifyContent:'flex-end',flex:1,marginLeft:'15%',paddingRight:'20%',marginTop:'30%'}}>
             <Text style = {{fontSize:36,fontWeight:'bold',color:Colors.textPrimary}}>
                 Welcome back...
@@ -261,6 +258,7 @@ export default class RegScreen extends React.Component {
               fontSize: 18,
               paddingLeft: 10,
               color:Colors.textPrimary,
+              marginBottom:20
             }}
                   keyboardType="default"
                   placeholder="Password"
@@ -278,40 +276,7 @@ export default class RegScreen extends React.Component {
                 <View style={{ width: 20 }} />
               )}
             </View>
-            <View style={{ paddingLeft: 30, paddingBottom: 20 }}>
-              <Text
-                style={{
-                  color: this.state.noOfChar ? "green" : "red",
-                  fontSize: 12,
-                }}
-              >
-                *At least 8 characters
-              </Text>
-              <Text
-                style={{
-                  color: this.state.upperCase ? "green" : "red",
-                  fontSize: 12,
-                }}
-              >
-                *At least 1 capital letter
-              </Text>
-              <Text
-                style={{
-                  color: this.state.symbol ? "green" : "red",
-                  fontSize: 12,
-                }}
-              >
-                *Atleast 1 symbol
-              </Text>
-              <Text
-                style={{
-                  color: this.state.digit ? "green" : "red",
-                  fontSize: 12,
-                }}
-              >
-                *Atleast 1 digit
-              </Text>
-            </View>
+            
           </Animated.View>
           <TouchableOpacity
             style={{ width: "100%" }}
@@ -337,7 +302,7 @@ export default class RegScreen extends React.Component {
                   fontSize: 18,
                 }}
               >
-                REGISTER
+                LOGIN
               </Text>
             </Animated.View>
           </TouchableOpacity>

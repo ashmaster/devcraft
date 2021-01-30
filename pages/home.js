@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Image, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image, ImageBackground, BackHandler } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import Colors from '../constants/color';
 import Head from '../components/Head';
 
 export default function Home() {
+  
   return (
     <View style={styles.container}>
       <ScrollView>

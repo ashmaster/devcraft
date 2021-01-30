@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Animated } from "react-native";
+import { View, Text, StyleSheet, Animated,Image, Dimensions } from "react-native";
 import GestureRecognizer, {
   swipeDirections,
 } from "react-native-swipe-gestures";
@@ -45,6 +45,7 @@ export default class Regorlog extends React.Component {
     };
     return (
       <View style={styles.main}>
+        <Image source = {require('../../images/11.png')} style = {{position:'absolute',top:Dimensions.get('window').height/6,width:150,height:150,alignSelf:'center'}}/>
         <Animatable.View ref={this.handleRegTextRef} style = {{flexDirection:'row'}}>
           <GestureRecognizer
             config={config}
@@ -94,7 +95,7 @@ export default class Regorlog extends React.Component {
           
         </Animatable.View>
 
-        <Text style = {{textAlign:'center',position:'absolute', bottom:'20%',left:'45%',color:Colors.textSecondary}}>Swipe on your choice ...</Text>
+        <Text style = {{textAlign:'center',position:'absolute', bottom:'20%',left:'45%',color:Colors.textSecondary}}>Swipe on your choice.</Text>
       </View>
     );
   }
