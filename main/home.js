@@ -6,8 +6,8 @@ import Head from '../components/Head';
 
 export default function Home() {
   return (
-    <>
-      <ScrollView style={styles.container}>
+    <View style={styles.container}>
+      <ScrollView>
        <Head />
 
        <View style={{marginVertical: 5}}>
@@ -54,7 +54,7 @@ export default function Home() {
 
         <View style={{marginVertical: 5}}>
           <View style={styles.viewMore}>
-            <View><Text style={styles.text}>Top Cources</Text></View>
+            <View><Text style={styles.text}>Top Courses</Text></View>
             <View style={{flexDirection: 'row'}}>
               <Text style={[styles.text, {paddingRight: 5}]}>See more</Text>
               <Feather name="arrow-right-circle" size={24} color={Colors.textPrimary} />
@@ -104,9 +104,9 @@ export default function Home() {
           </ScrollView>
         </View>
 
-        <View style={{marginVertical: 5}}>
+        <View style={{marginVertical: 5, paddingBottom: 80}}>
           <View style={styles.viewMore}>
-            <View><Text style={styles.text}>Top Cources</Text></View>
+            <View><Text style={styles.text}>Top Courses</Text></View>
             <View style={{flexDirection: 'row'}}>
               <Text style={[styles.text, {paddingRight: 5}]}>See more</Text>
               <Feather name="arrow-right-circle" size={24} color={Colors.textPrimary} />
@@ -155,9 +155,8 @@ export default function Home() {
             </View>
           </ScrollView>
         </View>
-      </ScrollView>
-      
-    </>
+      </ScrollView>  
+    </View>
   );
 }
 
