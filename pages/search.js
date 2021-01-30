@@ -13,6 +13,33 @@ import Head from '../components/Head'
 import Colors from "../constants/color";
 import { Ionicons, Feather } from "@expo/vector-icons";
 export default class Search extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      searchTerm:'',
+      search:[],
+      searchCourses : [
+        {
+          name: "Learn React",
+          offered: "Harvard",
+          rating: 4
+        },
+        {
+          name: "Learn Node",
+          offered: "Harvard",
+          rating: 4
+        },
+      ]
+    }
+  }
+  
+  textChanged(searchTerm){
+    this.setState({searchTerm});
+    let search = this.state.searchCourses.filter(item => {
+      return item.name.includes(searchTerm)
+    })
+    this.setState({search})
+  }
   render() {
     const interests = [
         {
@@ -36,6 +63,7 @@ export default class Search extends React.Component {
             uri:require('../images/deep.png')
         }
       ];
+    
     return (
       <View
         style={{
@@ -59,13 +87,13 @@ export default class Search extends React.Component {
             <TextInput
               style={styles.textInput}
               placeholder="Search"
-              onChangeText={(searchString) => {
-                this.setState({ searchString });
+              onChangeText={(searchTerm) => {
+                this.textChanged(searchTerm)
               }}
               underlineColorAndroid="transparent"
             />
           </View>
-        <ScrollView
+        {this.state.searchTerm.length == 0 ?<ScrollView
           contentContainerStyle={{
             alignItems: "center",
             justifyContent:'center',
@@ -86,7 +114,7 @@ export default class Search extends React.Component {
               <Feather name="arrow-right-circle" size={24} color={Colors.textPrimary} />
             </View>
           </View>
-          <ScrollView horizontal contentContainerStyle = {{marginHorizontal:40,paddingRight:100}}>
+           <ScrollView horizontal contentContainerStyle = {{marginHorizontal:40,paddingRight:100}}>
               {interests.map((item,index) => {
                   return(
                     <View
@@ -138,8 +166,21 @@ export default class Search extends React.Component {
                   )
               })}
           
-            </ScrollView>
-        </ScrollView>
+            </ScrollView> 
+
+            </ScrollView>: <ScrollView>
+            {this.state.search.map((item,index)=>{
+              return(
+                <View style = {{width:Dimensions.get('window').width-100,backgroundColor:Colors.secondaryDark, borderRadius:20,marginVertical:20,paddingVertical:20,paddingRight:20}}>
+                  <View style = {{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                  <Text style = {[styles.text,{fontSize:22}]}>{item.name}</Text>
+                  <Text style = {[styles.text,{fontStyle:"italic"}]}>Rating:{item.rating}</Text>
+                  </View>
+                  <Text style = {styles.text}>Offered by:{item.offered}</Text>
+                </View>
+              )
+            })}
+        </ScrollView>}
       </View>
     );
   }
